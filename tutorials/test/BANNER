@@ -1,0 +1,7 @@
+=================================================
+     🐧  bitpuff.io tutorial setup test  🐧
+=================================================
+This container tests that your docker setup is
+correct, and that privileged containers can
+create Linux network namespaces (NSs).
+-------------------------------------------------

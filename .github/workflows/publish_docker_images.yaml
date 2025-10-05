@@ -11,6 +11,7 @@ permissions:
 env:
   PLATFORMS: linux/amd64,linux/arm64
   BUILD_DIRS: |
+    tutorials/test/
     tutorials/net/mtu/
 
 jobs:
