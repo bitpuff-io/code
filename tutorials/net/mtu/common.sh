@@ -56,14 +56,27 @@ destroy_link() {
 # $1 ns
 # $2 dev
 # $3 addr
-addr_add(){
+add_addr(){
 	${SUDO} ip netns exec ${1} ip addr add ${3} dev ${2}
 }
 
 # $1 ns
 # $2 route
-route_add(){
+add_route(){
 	${SUDO} ip netns exec ${1} ip route add ${2}
+}
+
+# $1 ns
+# $2 dev
+# $3 mtu
+set_iface_mtu(){
+	${SUDO} ip netns exec ${1} ip link set dev ${2} mtu ${3}
+}
+
+# $1 ns
+# $2 ip_forward value (0, 1)
+set_sysctl_ip_forward(){
+	${SUDO} ip netns exec ${1} sysctl -q -w net.ipv4.ip_forward=${2}
 }
 
 list_scenarios(){
