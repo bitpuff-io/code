@@ -4,8 +4,9 @@ if [ -f /bp/.scenario ]; then
 fi
 
 NS=""
-if [ -f /bp/.ns ]; then
-	NS="#$(< /bp/.ns)"
+_NS="$(ip netns identify $$)"
+if [ "${_NS}" != "" ]; then
+	NS="#${_NS}"
 fi
 
 if tput setaf 1 >/dev/null 2>&1; then
@@ -43,7 +44,7 @@ exec(){
 
 export IGNOREEOF=3
 exit() {
-	if [ -f /bp/.ns ]; then
+	if [ "${NS}" != "" ]; then
 		builtin exit;
 	fi
 
@@ -62,9 +63,7 @@ shell(){
 	fi
 	_check_ns "${1}"
 
-	echo "${1}" > /bp/.ns
 	ip netns exec ${1} bash --rcfile /bp/.bashrc -i
-	rm -rf /bp/.ns || true
 }
 
 _shell_completion() {
