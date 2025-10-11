@@ -25,6 +25,35 @@ log_debug(){
 }
 
 # $1 namespace name
+_check_ns(){
+	if ! ${SUDO} ip netns exec ${1} true >/dev/null 2>&1 ; then
+		log_err "Invalid namespace: '${1}'"
+		return 1
+	fi
+}
+
+# $1 namespace
+# $2 iface
+_check_ns_iface(){
+	if ! ${SUDO} ip netns exec ${1} ip link show dev ${2} >/dev/null 2>&1 ; then
+		log_err "Invalid iface: '${2}' in namespace '${1}'!"
+		return 1
+	fi
+
+}
+
+# Parses namespace and interface
+# and sets them to CMD_NS and CMD_IFACE
+# $1 namespace.interface
+_parse_ns_iface(){
+	CMD_NS="$(echo ${1} | awk -F. '{print $1}')"
+	CMD_IFACE="$(echo ${1} | awk -F. '{print $2}')"
+	echo "Checking ${CMD_NS} and ${CMD_IFACE}"
+	_check_ns ${CMD_NS}
+	_check_ns_iface ${CMD_NS} ${CMD_IFACE}
+}
+
+# $1 namespace name
 create_ns() {
 	${SUDO} ip netns add ${1}
 	${SUDO} ip netns exec ${1} ip link set up dev lo

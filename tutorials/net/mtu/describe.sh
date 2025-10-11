@@ -16,14 +16,14 @@ echo""
 
 cat /bp/${SCENARIO}/TOPOLOGY.md
 echo""
-for ns in $(ip netns list | awk '{print $1}'); do
+for ns in $(${SUDO} ip netns list | awk '{print $1}'); do
 	echo "================================================="
 	echo -e "\033[1;34mNamespace: $ns\033[0m"
 	echo "-------------------------------------------------"
 	echo "IP addressing:"
-	ip netns exec ${ns} ip -brief addr
+	${SUDO} ip netns exec ${ns} ip -brief addr
 	echo ""
 	echo "Routing table:"
-	ip netns exec ${ns} ip -brief route
+	${SUDO} ip netns exec ${ns} ip -brief route
 	echo -e "\n"
 done

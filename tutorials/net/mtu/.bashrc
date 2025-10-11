@@ -1,3 +1,5 @@
+source /bp/common.sh
+
 SCENARIO="error"
 if [ -f /bp/.scenario ]; then
     SCENARIO=$(< /bp/.scenario)
@@ -24,13 +26,6 @@ alias _exec='exec'
 alias help="/bp/help.sh"
 alias describe="/bp/describe.sh"
 
-_check_ns(){
-	if ! ip netns list | grep -qw ${1}; then
-		echo "Invalid namespace: '${1}'"
-		return 1
-	fi
-}
-
 exec(){
 	if [ -z "${1:-}" ] || [ -z "${2:-}" ] ; then
 		echo "Usage: exec <namespace_name> <command>"
@@ -43,7 +38,7 @@ exec(){
 }
 
 export IGNOREEOF=3
-exit() {
+exit(){
 	if [ "${NS}" != "" ]; then
 		builtin exit;
 	fi
@@ -66,7 +61,7 @@ shell(){
 	ip netns exec ${1} bash --rcfile /bp/.bashrc -i
 }
 
-_shell_completion() {
+_shell_completion(){
 	local cur
 	cur="${COMP_WORDS[COMP_CWORD]}"
 	local namespaces=($(ip netns list | awk '{print $1}'))
