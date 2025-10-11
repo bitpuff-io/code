@@ -24,6 +24,7 @@ alias rm='rm -i'
 
 alias _exec='exec'
 alias help="/bp/help.sh"
+alias duoexec="/bp/duoexec.sh"
 alias describe="/bp/describe.sh"
 
 exec(){

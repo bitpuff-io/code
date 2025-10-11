@@ -10,6 +10,7 @@ LABEL org.opencontainers.image.source="https://github.com/bitpuff-io/code/"
 LABEL org.opencontainers.image.licenses="BSD"
 
 RUN apt update && apt install -y --no-install-recommends \
+	byobu          \
 	curl           \
 	iproute2       \
 	iputils-ping   \
