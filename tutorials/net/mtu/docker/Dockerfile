@@ -14,6 +14,7 @@ RUN apt update && apt install -y --no-install-recommends \
 	iproute2       \
 	iputils-ping   \
 	make           \
+	procps         \
 	python3-scapy  \
 	tcpdump        \
     && rm -rf /var/lib/apt/lists/*
