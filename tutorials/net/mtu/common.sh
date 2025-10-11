@@ -121,4 +121,5 @@ setup_scenario() {
 	fi
 
 	cd ${1} && ./setup.sh
+	echo ${1} > /bp/.scenario
 }
