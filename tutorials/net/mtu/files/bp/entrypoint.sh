@@ -5,6 +5,8 @@ set -euo pipefail
 cd /bp
 source common.sh
 
+setup_etc_hosts
+
 #
 # $1 scenario (default: scenario1)
 #

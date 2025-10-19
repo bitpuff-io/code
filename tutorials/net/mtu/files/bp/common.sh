@@ -24,6 +24,10 @@ log_debug(){
 	_log "DBG" "${1}"
 }
 
+setup_etc_hosts(){
+	cp -f /bp/hosts /etc/hosts
+}
+
 # $1 namespace name
 _check_ns(){
 	if ! ${SUDO} ip netns exec ${1} true >/dev/null 2>&1 ; then

@@ -59,7 +59,7 @@ shell(){
 	fi
 	_check_ns "${1}"
 
-	ip netns exec ${1} bash --rcfile /bp/.bashrc -i
+	ip netns exec ${1} bash --rcfile /root/.bashrc -i
 }
 
 _shell_completion(){

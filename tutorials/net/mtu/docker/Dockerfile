@@ -21,7 +21,7 @@ RUN apt update && apt install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 RUN mkdir /bp
-COPY . /bp
-COPY .bashrc /root/.bashrc
+COPY scenario1 /bp/scenario1
+COPY files/ /
 WORKDIR /root
 CMD ["/bp/entrypoint.sh"]
